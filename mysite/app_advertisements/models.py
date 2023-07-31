@@ -18,6 +18,17 @@ class Advertisement(models.Model):
                 "<span style='color: green; font-weight: bold'>Сегодня в {}</span>", created_time
             )
         return self.created_ad.strftime("%d.%m.%Y - %H:%M")
+
+    @admin.display(description="дата обновления")
+    def updated_date(self):
+        from django.utils import timezone
+        if self.updated_ad.date() == timezone.now().date():
+            updated_time = self.updated_ad.time().strftime("%H:%M")
+            return format_html(
+                "<span style='color: orange; font-weight: bold'>Сегодня в {}</span>", updated_time
+            )
+        return self.updated_ad.strftime("%d.%m.%Y - %H:%M")
+
     class Meta:
         db_table = "advertisements"
     def __str__(self):
