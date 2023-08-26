@@ -4,6 +4,14 @@ from django.utils.html import format_html
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
+
+class Adv(models.Model):
+    title = models.CharField(max_length=60)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    is_auction = models.BooleanField()
+    image = models.ImageField()
+
 class Advertisement(models.Model):
     title = models.CharField("заголовок", max_length=60)
     description = models.TextField("описание")

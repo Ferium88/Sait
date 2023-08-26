@@ -11,10 +11,10 @@ def index(request):
     context = {
         "advertisements": advertisements
     }
-    return render(request, 'index.html ', context)
+    return render(request, 'app_advertisements/index.html', context)
 
 def top_sellers(request):
-    return render(request, 'top-sellers.html')
+    return render(request, 'app_advertisements/top-sellers.html')
 
 def post_adv(request:WSGIRequest):
     if request.method == "POST":
@@ -24,11 +24,11 @@ def post_adv(request:WSGIRequest):
             adv.user = request.user
             adv.save()
             return redirect(
-                reverse("index")
+                reverse("main-page")
             )
     else:
         form = AdvertisementForm()
     context = {
         'form':form
     }
-    return render(request, 'advertisement-post.html', context)
+    return render(request, 'app_advertisements/advertisement-post.html', context)
